@@ -22,6 +22,10 @@ def fillout(PossibleDigits, sudoku, n):
             if tup[1] != False:
                 if len(tup[1]) == 1:
                     filloutspaces.append((tup[0], list(tup[1])))
+                else:
+                    pass
+            else:
+                pass
 
         for space, value in filloutspaces:
             if space <= 8:
@@ -41,22 +45,17 @@ def fillout(PossibleDigits, sudoku, n):
             elif space <= 71:
                 sudoku[7][space-9*7] = int(value[0])
             elif space <= 80:
-                sudoku[8][space-9*8] = int(value[0])
-    
+                sudoku[8][space-9*8] = int(value[0]) 
         
         notPossibleDigits = pointer(sudoku)
         PossibleDigits = convert(notPossibleDigits)
-         
+        
         fillout(PossibleDigits, sudoku, n+1)
     
     else:
-        print("\n".join([str(i) for i in sudoku]))
+        pass
 
 
-if __name__ == "__main__":
-    # Initial Round
-    notPossibleDigits = pointer(sudoku)
-    PossibleDigits = convert(notPossibleDigits)
+def possiblityStrategy(row, column, sudoku): # So you can rule out digits, e.g. that already have to be in that row in another box but it is not clear where
+    pass
 
-    fillout(PossibleDigits, sudoku, 0)
-    
