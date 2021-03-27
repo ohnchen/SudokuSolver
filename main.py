@@ -1,31 +1,4 @@
-row1 = [9,8,4, 0,3,1, 0,7,2]
-row2 = [6,1,0, 0,0,7, 0,0,0]
-row3 = [2,5,7, 0,0,9, 8,0,0]
-
-row4 = [3,0,0, 0,6,0, 0,1,0]
-row5 = [0,0,0, 3,7,0, 9,2,0]
-row6 = [0,0,9, 0,0,5, 0,0,0]
-
-row7 = [0,3,0, 0,0,6, 0,0,0]
-row8 = [0,4,5, 0,1,8, 0,9,6]
-row9 = [1,9,6, 7,0,0, 2,8,0]
-
-oldrow1 = [9,8,4, 0,3,1, 0,7,2]
-oldrow2 = [6,1,0, 0,0,7, 0,0,0]
-oldrow3 = [2,5,7, 0,0,9, 8,0,0]
-
-oldrow4 = [3,0,0, 0,6,0, 0,1,0]
-oldrow5 = [0,0,0, 3,7,0, 9,2,0]
-oldrow6 = [0,0,9, 0,0,5, 0,0,0]
-
-oldrow7 = [0,3,0, 0,0,6, 0,0,0]
-oldrow8 = [0,4,5, 0,1,8, 0,9,6]
-oldrow9 = [1,9,6, 7,0,0, 2,8,0]
-
-sudoku = [row1, row2, row3, row4, row5, row6, row7, row8, row9]
-emptySudoku = [oldrow1, oldrow2, oldrow3, oldrow4, oldrow5, oldrow6, oldrow7, oldrow8, oldrow9]
-
-
+#!/usr/bin/env python3 
 def pointer(sudoku):
     #Point to different boxes
     notPossibleDigits = []
@@ -114,7 +87,7 @@ def convert(DigitList):
 
     return newDigitList
 
-def fillout(PossibleDigits, sudoku, n):    
+def fillout(PossibleDigits, sudoku, n):
     if n < 10:
         liste = [(i, j) for i, j in enumerate(PossibleDigits)]
         filloutspaces = []
@@ -150,13 +123,73 @@ def fillout(PossibleDigits, sudoku, n):
         
         notPossibleDigits = pointer(sudoku)
         PossibleDigits = convert(notPossibleDigits)
-        
+
         fillout(PossibleDigits, sudoku, n+1)
     
     else:
         pass
 
+def OnlyPossibleDigitInBox(PossibleDigits): # So you can rule out digits, e.g. that already have to be in that row in another box but it is not clear where
+    box1 = []
+    box2 = []
+    box3 = []
+    box4 = []
+    box5 = []
+    box6 = []
+    box7 = []
+    box8 = []
+    box9 = []
 
-def possiblityStrategy(row, column, sudoku): # So you can rule out digits, e.g. that already have to be in that row in another box but it is not clear where
-    pass
+    boxes = [box1, box2, box3, box4, box5, box6, box7, box8, box9]
+
+    for i in range(len(PossibleDigits)-1):
+        if i == 0 or i == 9 or i == 18:
+            box1.append(PossibleDigits[i:i+3])
+        elif i == 3 or i == 12 or i == 21:
+            box2.append(PossibleDigits[i:i+3])
+        elif i == 6 or i == 15 or i == 24:
+            box3.append(PossibleDigits[i:i+3])
+
+        elif i == 27 or i == 36 or i == 45:
+            box4.append(PossibleDigits[i:i+3])
+        elif i == 30 or i == 39 or i == 48:
+            box5.append(PossibleDigits[i:i+3])
+        elif i == 33 or i == 42 or i == 51:
+            box6.append(PossibleDigits[i:i+3])
+
+        elif i == 54 or i == 63 or i == 72:
+            box7.append(PossibleDigits[i:i+3])
+        elif i == 57 or i == 66 or i == 75:
+            box8.append(PossibleDigits[i:i+3])
+        elif i == 60 or i == 69 or i == 78:
+            box9.append(PossibleDigits[i:i+3])
+
+    for box in boxes:
+        print(box)
+    print("\n")
+
+
+if __name__ == "__main__":
+    # *** Try Sudoku ***
+    line1 = [6,0,0, 1,0,0, 0,0,2]
+    line2 = [8,0,1, 0,9,0, 0,0,0]
+    line3 = [0,7,5, 0,8,4, 0,0,0]
+
+    line4 = [4,3,0, 0,2,0, 5,6,1]
+    line5 = [5,1,8, 7,0,0, 4,0,9]
+    line6 = [0,9,6, 4,1,0, 3,0,0]
+
+    line7 = [0,0,0, 0,7,0, 0,0,0]
+    line8 = [0,6,0, 0,3,1, 0,5,0]
+    line9 = [7,0,2, 5,4,0, 6,0,3]
+
+    sudoku = [line1, line2, line3, line4, line5, line6, line7, line8, line9]
+
+    notPossibleDigits = pointer(sudoku)
+    PossibleDigits = convert(notPossibleDigits)
+    OnlyPossibleDigitInBox(PossibleDigits)
+    fillout(PossibleDigits, sudoku, 0)
+   
+    print(sudoku)
+
 
